@@ -1,0 +1,5 @@
+openAI
+    https://gym.openai.com/envs/#atari
+    https://gym.openai.com/envs/#box2d
+
+https://towardsdatascience.com/deeptraffic-dqn-tuning-for-traffic-navigation-75-01-mph-solution-23087e2411cfa
