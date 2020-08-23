@@ -1,0 +1,6 @@
+{
+    "name":"safe",
+    "action_rep":4,
+    "grass_penalty":15,
+    "still_penalty":0.1
+}

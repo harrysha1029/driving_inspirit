@@ -1,0 +1,6 @@
+{
+    "name":"baseline",
+    "action_rep":1,
+    "grass_penalty":0.1,
+    "still_penalty":0.1
+}

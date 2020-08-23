@@ -1,0 +1,6 @@
+{
+    "name":"mix_limit",
+    "action_rep":4,
+    "grass_penalty":20,
+    "still_penalty":0.003
+}

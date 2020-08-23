@@ -1,0 +1,6 @@
+{
+    "name":"fast",
+    "action_rep":4,
+    "grass_penalty":0.1,
+    "still_penalty":1
+}
