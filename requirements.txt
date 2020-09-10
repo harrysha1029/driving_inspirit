@@ -1,0 +1,7 @@
+Box2D
+gym[box2d]
+plotly
+scikit-learn
+tensorflow
+pandas
+tqdm

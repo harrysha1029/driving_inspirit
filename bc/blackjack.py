@@ -1,10 +1,10 @@
 import random
 from collections import defaultdict
 
-from tqdm import tqdm
-
 import gym
 import plotly.express as px
+from tqdm import tqdm
+
 from common.utils import load_pkl, print_step, save_pkl
 
 env = gym.make("Blackjack-v0")
@@ -34,7 +34,6 @@ def run_blackjack(policy, show=False):
 
     env.close()
     return history
-
 
 
 def average_reward(env, policy, trials=10):

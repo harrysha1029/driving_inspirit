@@ -1,8 +1,6 @@
 import numpy as np
 import tensorflow as tf
 from sklearn.model_selection import train_test_split
-from common.consts import DIM, INDEX2ACTIONS, INDEX2STRING, N_ACTIONS
-from common.driving_utils import get_features_from_env, get_racing_env, run_racing
 from tensorflow.keras import Input, Model
 from tensorflow.keras.callbacks import ModelCheckpoint
 from tensorflow.keras.layers import (
@@ -20,6 +18,9 @@ from tensorflow.keras.layers import (
 from tensorflow.keras.losses import sparse_categorical_crossentropy
 from tensorflow.keras.models import load_model, save_model
 from tensorflow.keras.optimizers import Adam
+
+from common.consts import DIM, INDEX2ACTIONS, INDEX2STRING, N_ACTIONS
+from common.driving_utils import get_features_from_env, get_racing_env, run_racing
 
 
 # ======MODEL==========
@@ -67,7 +68,7 @@ def get_bc_model(image_encoder=simple_image_encoder):
 # ========== END MODEL ============
 
 
-def train_model(model, imgs, features, y, epochs=10, name='bc'):
+def train_model(model, imgs, features, y, epochs=10, name="bc"):
     model.compile(
         optimizer=Adam(learning_rate=0.0004),
         loss=sparse_categorical_crossentropy,
@@ -86,7 +87,9 @@ def train_model(model, imgs, features, y, epochs=10, name='bc'):
         [imgs_train, features_train],
         y_train,
         epochs=epochs,
-        callbacks=[ModelCheckpoint(f"checkpoints/bc/{name}", save_best_only=True, verbose=1)],
+        callbacks=[
+            ModelCheckpoint(f"checkpoints/bc/{name}", save_best_only=True, verbose=1)
+        ],
         validation_data=([imgs_test, features_test], y_test),
     )
 

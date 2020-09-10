@@ -2,7 +2,9 @@ import gym
 import numpy as np
 from gym.wrappers.monitor import Monitor
 from pyglet.window import key
+
 from common.consts import *
+
 
 def find_car(img):
     for r in range(96):
@@ -27,13 +29,13 @@ def greyscale(img):
     return x
 
 
-def run_racing(env, policy, show=False):
+def run_racing(env, policy):
     isopen = True
     while isopen:
         obs = env.reset()
         while True:
             move = policy(obs, env)
-            new_obs, reward, done, info = env.step(move)
+            new_obs, _, done, _ = env.step(move)
             obs = new_obs
             isopen = env.render()
             if done:
@@ -60,8 +62,9 @@ def get_racing_env(record_video=False):
     env.render()
     if record_video:
         env = Monitor(env, "video", force=True)
-    env = RewardWrapper(env)
+    # env = RewardWrapper(env)
     return env
+
 
 class RewardWrapper(gym.RewardWrapper):
     def __init__(self, env, grass_penalty, still_penalty):
@@ -82,7 +85,7 @@ class RewardWrapper(gym.RewardWrapper):
         return rew
 
 
-def get_racing_env_for_human(record_video):
+def get_racing_env_for_human(record_video, wrapper):
     a = np.array([0.0, 0.0, 0.0])
 
     def key_press(k, mod):
@@ -112,7 +115,8 @@ def get_racing_env_for_human(record_video):
     if record_video:
         env = Monitor(env, "video", force=True)
 
-    # env = RewardWrapper(env, 5, 0.1)
+    if wrapper is not None:
+        env = wrapper(env)
     return a, env
 
 
@@ -122,8 +126,8 @@ def get_features_from_env(env):
     return [speed, wheel.angularVelocity] + list(wheel.linearVelocity)
 
 
-def human_race():
-    a, env = get_racing_env_for_human(False)
+def human_race(wrapper=None):
+    a, env = get_racing_env_for_human(False, wrapper)
     isopen = True
     while isopen:
         s = env.reset()
@@ -131,6 +135,8 @@ def human_race():
         steps = 0
         while True:
             s, r, done, info = env.step(a)
+            if wrapper is not None:
+                print(r)
             total_reward += r
             if steps % 200 == 0 or done:
                 print("\naction " + str(["{:+0.2f}".format(x) for x in a]))

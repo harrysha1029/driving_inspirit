@@ -1,8 +1,10 @@
 data
 gym
 imgs
-video
+videos
 checkpoints
+logs
+training_results
 .vscode
 .isort.cfg
 .ipynb_checkpoints

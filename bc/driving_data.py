@@ -5,6 +5,7 @@ from pathlib import Path
 
 import gym
 import numpy as np
+
 from common.consts import ACTION2INDEX, INDEX2ACTIONS, N_ACTIONS
 from common.driving_utils import get_features_from_env, get_racing_env_for_human
 from common.utils import load_json, load_pkl, save_json, save_pkl
