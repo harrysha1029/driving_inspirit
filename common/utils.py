@@ -3,7 +3,11 @@ import pickle
 
 
 def print_step(obs, reward, done, info):
-    print(f"{obs=}\n{reward=}\n{done=}\n{info=}")
+    print("Obs: ", obs)
+    print("Reward: ", reward)
+    print("Done: ", done)
+    print("Info: ", info)
+
 
 
 def save_pkl(obj, fname):
